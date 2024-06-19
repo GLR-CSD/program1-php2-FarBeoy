@@ -3,7 +3,14 @@
 declare(strict_types=1);
 class Album
 {
-public function __construct(int $id, string $naam, string $artiesten, string $release_datum, string $url, string $afbeelding, string $prijs  )
+    private ?int $id;
+    private string $naam;
+    private string $artiesten;
+    private string $release_datum;
+    private string $url;
+    private string $afbeelding;
+    private string $prijs;
+public function __construct(?int $id, string $naam, string $artiesten, string $release_datum, string $url, string $afbeelding, string $prijs)
 {
     $this->id = $id;
     $this->naam = $naam;
@@ -46,6 +53,19 @@ public function save(PDO $db): void
     $stmt->bindParam(':prijs', $this->prijs);
     $stmt->execute();
 }
+
+    public function update(PDO $db): void
+    {
+        // Voorbereiden van de query
+        $stmt = $db->prepare("UPDATE album SET naam = :naam, artiesten = :artiesten, release_datum = :release_datum, url = :url, afbeelding = :afbeelding, prijs = :prijs WHERE id = :id");
+        $stmt->bindParam(':naam', $this->naam);
+        $stmt->bindParam(':artiesten', $this->artiesten);
+        $stmt->bindParam(':release_datum', $this->release_datum);
+        $stmt->bindParam(':url', $this->url);
+        $stmt->bindParam(':afbeelding', $this->afbeelding);
+        $stmt->bindParam(':prijs', $this->prijs);
+        $stmt->execute();
+    }
 
 public function getId(): int
     {

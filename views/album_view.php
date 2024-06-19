@@ -56,7 +56,7 @@
         <?php endif; ?><br>
 
         <label for="release_datum">Release_datum:</label>
-        <input type="text" id="release_datum" name="release_datum" value="<?= $formValues['release_datum'] ?? '' ?>">
+        <input type="date" id="release_datum" name="release_datum" value="<?= $formValues['release_datum'] ?? '' ?>">
         <?php if (isset($errors['release_datum'])): ?>
             <span style="color: red;"><?= $errors['release_datum'] ?></span>
         <?php endif; ?><br>
